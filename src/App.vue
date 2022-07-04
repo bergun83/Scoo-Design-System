@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+	<v-app
+		app
+	>
+		<m-navigation-drawer
+			:visible="drawerVisible"
+			@close="handleCloseDrawer"
+		/>
+		<m-app-bar
+			@open-drawer="handleOpenDrawer"
+		/>
+		<v-main>
+			<router-view/>
+		</v-main>
+	</v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+	import MAppBar from '@/components/MAppBar/MAppBar';
+	import MNavigationDrawer from '@/components/MNavigationDrawer/MNavigationDrawer';
+
+	export default {
+
+		name: 'App',
+
+		components: {
+			MAppBar,
+			MNavigationDrawer,
+		},
+
+		data: () => ({
+			drawerVisible: false,
+		}),
+
+		methods: {
+			handleOpenDrawer () {
+				this.drawerVisible=true;
+			},
+			handleCloseDrawer () {
+				this.drawerVisible=false;
+			},
+		}
 }
+  
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
